@@ -19,12 +19,17 @@ opkg install node node-npm
     ```bash
     npm run dev or yarn dev
     ```
-5. Auto start on boot.
-    ```bash
-    cp etc/init.d/tgnodewrt /etc/init.d/
-    /etc/init.d/tgnodewrt enable
-    /etc/init.d/tgnodewrt start
-    ```
+### Auto start on boot
+```bash
+cp /root/tgnodewrt/etc/init.d/tgnodewrt /etc/init.d/
+/etc/init.d/tgnodewrt enable
+/etc/init.d/tgnodewrt start
+```
+### Speedtest every 1 hour
+Add to scheduled task
+```bash
+0 */1 * * *  /root/tgnodewrt/command/sh/speed.sh
+```
 
 
 
