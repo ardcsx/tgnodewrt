@@ -1,7 +1,7 @@
 # tgnodeWRT
 Personal telegram bot for openwrt
 
-#Usage
+# Usage
 ## Install NodeJS
 ```bash
 opkg update
