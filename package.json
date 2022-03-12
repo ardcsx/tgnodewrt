@@ -1,0 +1,21 @@
+{
+  "name": "tgnodewrt",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "license": "MIT",
+  "type": "module",
+  "author": "Ardcs",
+  "dependencies": {
+    "axios": "^0.26.0",
+    "dotenv": "^16.0.0",
+    "node-bash": "^5.0.1",
+    "node-fetch": "^3.2.2",
+    "telegraf": "4.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
