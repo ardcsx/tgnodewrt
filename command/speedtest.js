@@ -8,6 +8,7 @@ async function speedtest(ctx) {
         debug: false,
     });
     const reply = await ctx.reply('Please wait...')
+    ctx.replyWithChatAction('typing')
     try {
         const bashrun = await sh.invoke('speedtest --accept-license -f json > /tmp/speedtest.log')
         const rawData = fs.readFileSync('/tmp/speedtest.log')
