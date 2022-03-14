@@ -46,10 +46,9 @@ async function modeminfo(ctx) {
     const speedDl = bytesToSize(Speed_Dl)
     const speedUl = bytesToSize(Speed_Ul)
     ctx.reply(
-        `<b>✨ Modeminfo </b>\n\nStatus: ${wan_state == 1 ? 'Not Connected' : 'Connected'}\nUptime: ${secondsToHms(dur_time)}\nWAN IP: ${wan_ip} \nNetwork Name: ${network_name}\nSignal: ${signal}\nCellID: ${CellID}\nBand: ${Band}\nRSSI: ${rssi} dBm\nRSRP: ${RSRP} dB\nRSRQ: ${RSRQ} dB\nSINR: ${SINR} dB\nRSCP: ${RSCP}\n\n<b>DL:</b> <code>${speedDl}/s</code>  <b>UL:</b> <code>${speedUl}/s</code>\nLast Usage: ${bytesToSize(last_usage)}\nMonthly Usage: ${bytesToSize(monthly_home_usage)}`,
+        `<b>✨ Modem Information </b>\n\n<code>Status: ${wan_state == 1 ? 'Not Connected' : 'Connected'}\nUptime: ${secondsToHms(dur_time)}\nWAN IP: ${wan_ip} \nNetwork Name: ${network_name}\nSignal: ${signal}\nCellID: ${CellID}\nBand  : ${Band}\nRSSI  : ${rssi} dBm\nRSRP  : ${RSRP} dB\nRSRQ  : ${RSRQ} dB\nSINR  : ${SINR} dB\nRSCP  : ${RSCP}\n\n<b>DL:</b> <code>${speedDl}/s</code>  <b>UL:</b> <code>${speedUl}/s</code>\nLast Usage: ${bytesToSize(last_usage)}\nMonthly Usage: ${bytesToSize(monthly_home_usage)}</code>`,
         { parse_mode: 'HTML' }
     )
-
 }
 
 export default modeminfo
