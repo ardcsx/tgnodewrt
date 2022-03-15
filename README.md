@@ -5,7 +5,7 @@ Personal telegram bot for openwrt
 ## Install NodeJS
 ```bash
 opkg update
-opkg install node node-npm
+opkg install node node-npm vnstat vnstati
 ```
 
 ## Install bot
