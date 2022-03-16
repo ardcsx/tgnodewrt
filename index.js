@@ -8,6 +8,7 @@ import speedtest from "./command/speedtest.js";
 import { system_info, restart_bot, restart } from "./command/system.js"
 import speedtest_log from "./command/speedtest_log.js"
 import vnstat from "./command/vnstat.js"
+import tts from "./command/tts.js"
 import { isAdmin } from "./lib/helper.js";
 
 
@@ -38,5 +39,6 @@ bot.command('system_info', system_info)
 bot.command('restart_bot', restart_bot)
 bot.command('restart', restart)
 bot.use(vnstat)
+bot.use(tts)
 
 bot.launch()
