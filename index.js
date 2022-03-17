@@ -5,7 +5,7 @@ import modeminfo from "./command/modeminfo.js";
 import my_ip from "./command/my_ip.js";
 import bash_cmd from "./command/bash_cmd.js";
 import speedtest from "./command/speedtest.js";
-import { system_info, restart_bot, restart } from "./command/system.js"
+import SystemHandler from "./command/system.js"
 import speedtest_log from "./command/speedtest_log.js"
 import vnstat from "./command/vnstat.js"
 import tts from "./command/tts.js"
@@ -30,14 +30,12 @@ bot.command('ping', (ctx) => {
     ctx.reply(`📍 <b>Bot response time <code>${total_time.toFixed(2)}s</code></b>`, { reply_to_message_id: ctx.message.message_id, parse_mode: 'HTML' });
 })
 
+bot.use(SystemHandler)
 bot.command('modeminfo', modeminfo)
 bot.command('my_ip', my_ip)
 bot.command('speedtest', speedtest)
 bot.command('speedtest_log', speedtest_log)
 bot.hears(/^.bash (.+)/i, bash_cmd)
-bot.command('system_info', system_info)
-bot.command('restart_bot', restart_bot)
-bot.command('restart', restart)
 bot.use(vnstat)
 bot.use(tts)
 

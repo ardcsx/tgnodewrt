@@ -1,7 +1,10 @@
+import { Composer } from "telegraf"
 import { Bash } from 'node-bash';
 
+const composer = new Composer();
 
-export async function system_info(ctx) {
+
+async function system_info(ctx) {
     const sh = new Bash({
         debug: false,
     });
@@ -17,19 +20,20 @@ export async function system_info(ctx) {
     }
 }
 
-export async function restart_bot(ctx) {
+async function restart_bot(ctx) {
     const sh = new Bash({
         debug: false,
     });
     try {
         ctx.reply('Restart bot...')
-        await sh.invoke('pm2 restart tgnodewrt')
+        await sh.invoke('/etc/init.d/tgnodewrt restart')
     } catch (error) {
         ctx.reply('Err: ' + error.message)
         console.log(error)
     }
 }
-export async function restart(ctx) {
+
+async function restart(ctx) {
     const sh = new Bash({
         debug: false,
     });
@@ -42,4 +46,18 @@ export async function restart(ctx) {
         console.log(error)
     }
 }
+
+async function ping(ctx) {
+    const start = ctx.update.message.date * 1000
+    const end = new Date().getTime()
+    const total_time = (end - start) / 1000
+    ctx.reply(`📍 <b>Bot response time <code>${total_time.toFixed(2)}s</code></b>`, { reply_to_message_id: ctx.message.message_id, parse_mode: 'HTML' });
+}
+
+composer.command('ping', ping)
+composer.command('system_info', system_info)
+composer.command('restart_bot', restart_bot)
+composer.command('restart', restart)
+
+export default composer
 
