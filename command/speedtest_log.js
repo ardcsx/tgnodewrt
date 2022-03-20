@@ -8,7 +8,7 @@ function sleep(ms) {
 async function speedtest_log(ctx) {
     try {
         const rawData = readFileSync('/tmp/speedtestall.log', 'utf-8')
-        const arrayData = rawData.split(/\r?\n/)
+        const arrayData = rawData.split(/\r?\n/).slice(1).slice(-25)
         for (let i = 0; i < arrayData.length; i++) {
             if (arrayData[i].length > 20) {
                 try {
