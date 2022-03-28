@@ -6,7 +6,7 @@ START=99
 start() {
 	if [ ! -f "/var/run/tgnodewrt.pid" ]; then
 		echo "1" > /var/run/tgnodewrt.pid
-		cd /root/tgnodewrt && node /root/tgnodewrt/index.js >/dev/null 2>&1 &
+		cd /root/tgnodewrt && node /root/tgnodewrt/index.js > /tmp/tgnodewrt.log 2>&1 &
 		/root/tgnodewrt/command/sh/onstart.sh >/dev/null
 	fi
 	return 0
