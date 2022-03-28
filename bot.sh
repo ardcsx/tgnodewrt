@@ -10,7 +10,7 @@ do
         "add crontab")
             tmpfile=$(mktemp)
             crontab -l >"$tmpfile"
-            printf '%s\n' "*/5 * * * *  /root/tgnodewrt/util/bot-checker.sh" >>"$tmpfile"
+            printf '%s\n' "*/2 * * * *  /root/tgnodewrt/util/bot-checker.sh" >>"$tmpfile"
             crontab "$tmpfile" && rm -f "$tmpfile"
             echo -e "Successfully add crontab"
             break
