@@ -4,17 +4,14 @@
 START=99
 
 start() {
-	if [ ! -f "/var/run/tgnodewrt.pid" ]; then
-		echo "1" > /var/run/tgnodewrt.pid
-		# cd /root/tgnodewrt && node /root/tgnodewrt/index.js &
-		cd /root/tgnodewrt && pm2 restart ecosystem.config.cjs
-		/root/tgnodewrt/command/sh/onstart.sh >/dev/null
-	fi
+	# cd /root/tgnodewrt && node /root/tgnodewrt/index.js &
+	cd /root/tgnodewrt && pm2 start ecosystem.config.cjs
+	/root/tgnodewrt/command/sh/onstart.sh >/dev/null
 	return 0
 }
 
 stop() {
-	rm -f /var/run/tgnodewrt.pid
+	# rm -f /var/run/tgnodewrt.pid
 	pm2 stop tgnodewrt
 	# kill $(pgrep -f /root/tgnodewrt) >/dev/null 2>&1
 }
