@@ -59,7 +59,6 @@ Add to scheduled task
 ## Bot command
 
 #### Main command<br/>
-
 /ping - bot response time<br/>
 /system_info - router system information<br/>
 /modeminfo - allcatel modem information<br/>
@@ -72,16 +71,13 @@ Add to scheduled task
 <br/>
 
 #### Bash commnd<br/>
-
 .bash {cmd}<br/>
 <br/>
 
 #### Cek Kuota XL<br/>
-
 /kuotaxl - cek informasi no xl<br/>
 !setxl (nohp) - set no xl<br/>
 <br/>
 
 #### Extra command<br/>
-
 .tts {text} - text to speech<br/>
