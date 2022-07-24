@@ -9,7 +9,7 @@ const helpText = `tgnodeWRT Bot Command\n
 /modeminfo - allcatel modem information
 /my_ip - IP information
 /speedtest - run speedtest ookla
-/speeedtest_log - get speedtest log
+/speedtest_log - get speedtest log
 /vnstat - show vnstat menu
 
 <b>Restart command</b>
@@ -21,7 +21,7 @@ const helpText = `tgnodeWRT Bot Command\n
 
 <b>Cek Kuota XL</b>
 /kuotaxl - cek informasi no xl
-!setxl (nohp) - set no xl
+!setxl {nohp} - set no xl
 
 <b>Extra command</b>
 .tts {text} - text to speech`
