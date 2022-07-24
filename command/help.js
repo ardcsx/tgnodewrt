@@ -11,6 +11,8 @@ const helpText = `tgnodeWRT Bot Command\n
 /speedtest - run speedtest ookla
 /speeedtest_log - get speedtest log
 /vnstat - show vnstat menu
+
+<b>Restart command</b>
 /restart_bot - restart tgnodeWRT bot
 /restart - restart router
 
