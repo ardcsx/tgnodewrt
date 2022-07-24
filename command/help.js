@@ -14,7 +14,7 @@ const helpText = `tgnodeWRT Bot Command\n
 /restart_bot - restart tgnodeWRT bot
 /restart - restart router
 
-<b>Bash commnd</b>
+<b>Bash command</b>
 .bash {cmd}
 
 <b>Cek Kuota XL</b>
@@ -23,6 +23,8 @@ const helpText = `tgnodeWRT Bot Command\n
 
 <b>Extra command</b>
 .tts {text} - text to speech`
+
+
 async function helpCmd(ctx) {
     try {
         ctx.reply(helpText, { parse_mode: "HTML" })
