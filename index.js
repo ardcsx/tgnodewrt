@@ -9,6 +9,8 @@ import SystemHandler from "./command/system.js"
 import speedtest_log from "./command/speedtest_log.js"
 import vnstat from "./command/vnstat.js"
 import tts from "./command/tts.js"
+import sidompulHandler from "./command/sidompul.js"
+import helpHandler from "./command/help.js"
 import { isAdmin } from "./lib/helper.js";
 
 
@@ -22,14 +24,7 @@ bot.telegram.getMe().then((bot_informations) => {
 
 
 bot.use(isAdmin)
-
-bot.command('ping', (ctx) => {
-    const start = ctx.update.message.date * 1000
-    const end = new Date().getTime()
-    const total_time = (end - start) / 1000
-    ctx.reply(`📍 <b>Bot response time <code>${total_time.toFixed(2)}s</code></b>`, { reply_to_message_id: ctx.message.message_id, parse_mode: 'HTML' });
-})
-
+bot.use(helpHandler)
 bot.use(SystemHandler)
 bot.command('modeminfo', modeminfo)
 bot.command('my_ip', my_ip)
@@ -38,5 +33,6 @@ bot.command('speedtest_log', speedtest_log)
 bot.hears(/^.bash (.+)/i, bash_cmd)
 bot.use(vnstat)
 bot.use(tts)
+bot.use(sidompulHandler)
 
 bot.launch()

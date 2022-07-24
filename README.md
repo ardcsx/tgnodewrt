@@ -55,3 +55,33 @@ Add to scheduled task
 ```bash
 0 */1 * * *  /root/tgnodewrt/command/sh/speed.sh
 ```
+
+## Bot command
+
+#### Main command<br/>
+
+/ping - bot response time<br/>
+/system_info - router system information<br/>
+/modeminfo - allcatel modem information<br/>
+/my_ip - IP information<br/>
+/speedtest - run speedtest ookla<br/>
+/speeedtest_log - get speedtest log<br/>
+/vnstat - show vnstat menu<br/>
+/restart_bot - restart tgnodeWRT bot<br/>
+/restart - restart router<br/>
+<br/>
+
+#### Bash commnd<br/>
+
+.bash {cmd}<br/>
+<br/>
+
+#### Cek Kuota XL<br/>
+
+/kuotaxl - cek informasi no xl<br/>
+!setxl (nohp) - set no xl<br/>
+<br/>
+
+#### Extra command<br/>
+
+.tts {text} - text to speech<br/>
