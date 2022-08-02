@@ -16,6 +16,7 @@ function paginate(array, page_size, page_number) {
 async function addCtCommand(ctx) {
     try {
         const [cmd_name, at_cmd] = ctx.match[1].split("#")
+        const config = getConfig()
         const customCommands = config?.customCommands || []
         customCommands.unshift({
             name: cmd_name,
@@ -33,8 +34,9 @@ async function addCtCommand(ctx) {
 
 async function ctCommands(ctx, page = 1) {
     try {
+        const config = getConfig()
         const commandlist = config?.customCommands
-        const totalPage = Math.ceil(commandlist.length / 10)
+        const totalPage = Math.ceil(commandlist?.length / 10) || 1
         const cmdlist = paginate(commandlist, 10, page).map((cmd, i) => {
             const menu = [
                 { text: `${cmd.name}`, callback_data: `ctcommand ${i}` }
