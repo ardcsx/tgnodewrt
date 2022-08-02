@@ -19,6 +19,9 @@ const helpText = `tgnodeWRT Bot Command\n
 <b>Bash command</b>
 .bash {cmd}
 
+<b>Custom command</b>
+/cmd - custom command menu
+
 <b>Cek Kuota XL</b>
 /kuotaxl - cek informasi no xl
 !setxl {nohp} - set no xl
