@@ -1,52 +1,55 @@
+import { Composer } from "telegraf"
 import { Bash } from 'node-bash';
 import fs from "fs"
-import { bytesToSize, responseTime } from '../lib/helper.js'
+import { parseSpeedtestData, sleep, editMsg } from '../lib/helper.js'
+import { exec } from "child_process"
 
+const composer = new Composer();
+
+composer.command('/speedtest', speedtest)
 
 async function speedtest(ctx) {
+
+
     const sh = new Bash({
         debug: false,
     });
-    const reply = await ctx.reply('Please wait...')
+    let loading = true
+    const reply = await ctx.reply('Please wait')
     ctx.replyWithChatAction('typing')
     try {
-        const bashrun = await sh.invoke('speedtest --accept-license -f json > /tmp/speedtest.log')
-        const rawData = fs.readFileSync('/tmp/speedtest.log')
-        const data = JSON.parse(rawData)
-        const download = (data.download.bandwidth / 125000).toFixed(2)
-        const upload = (data.upload.bandwidth / 125000).toFixed(2)
-        const waktu = new Date().toLocaleString('id-ID', {
-            timeZone: 'Asia/Jakarta',
-            hour12: false
+        exec("speedtest --accept-license -f json > /tmp/speedtest.json", (error, stdout, stderr) => {
+            // if (error) {
+            //     console.log(`error: ${error.message}`);
+            //     return;
+            // }
+            if (stderr) {
+                // console.log(`stderr: ${stderr}`);
+                loading = false
+                try {
+                    ctx.replyWithChatAction('typing')
+                    const rawData = fs.readFileSync('/tmp/speedtest.json')
+                    const data = JSON.parse(rawData)
+                    const speedtest_text = parseSpeedtestData(data)
+                    editMsg(ctx, reply, speedtest_text)
+                    return;
+                } catch (error) {
+                    editMsg(ctx, reply, error.message)
+                }
+            }
+            // console.log(`stdout: ${stdout}`);
         });
-        const response_time = responseTime(ctx.update.message.date)
-        const loss = data.packetLoss ? `${data.packetLoss.toFixed(1)} %` : '0'
-        const speedtest_text = `<b>Speedtest Result</b> ${waktu}\n\n<code>Server: ${data.server.name} ${data.server.location}\n   ISP: ${data.isp}\n  Ping: ${data.ping.latency.toFixed()} ms (jitter ${data.ping.jitter.toFixed()} ms)\n    DL: ${download} Mbps (${bytesToSize(data.download.bytes)})\n    UL: ${upload} Mbps (${bytesToSize(data.upload.bytes)})\n  Loss: ${loss}</code>\n\nResult: ${data.result.url}\n\n${response_time}`
-        ctx.telegram.editMessageText(
-            reply.chat.id,
-            reply.message_id,
-            undefined,
-            `${speedtest_text}`,
-            {
-                disable_web_page_preview: true,
-                parse_mode: 'HTML'
-            }
-        )
-        // console.log(data)
-
+        let i = 1
+        while (loading) {
+            editMsg(ctx, reply, `Please wait (${i * 2}s)...`)
+            await sleep(2000)
+            i++
+        }
+        return
     } catch (error) {
-        ctx.telegram.editMessageText(
-            reply.chat.id,
-            reply.message_id,
-            undefined,
-            `${error.message}`,
-            {
-                disable_web_page_preview: true,
-                parse_mode: 'HTML'
-            }
-        )
+        editMsg(ctx, reply, error.message)
         console.log(error)
     }
 }
 
-export default speedtest
+export default composer

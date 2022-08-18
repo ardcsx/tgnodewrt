@@ -6,12 +6,12 @@ import my_ip from "./command/my_ip.js";
 import bash_cmd from "./command/bash_cmd.js";
 import speedtest from "./command/speedtest.js";
 import SystemHandler from "./command/system.js"
-import speedtest_log from "./command/speedtest_log.js"
 import vnstat from "./command/vnstat.js"
 import tts from "./command/tts.js"
 import sidompulHandler from "./command/sidompul.js"
 import customCommand from "./command/custom_cmd.js"
 import helpHandler from "./command/help.js"
+import speedtestlog from "./command/speedtest_log.js"
 import { isAdmin } from "./lib/helper.js";
 
 
@@ -29,12 +29,12 @@ bot.use(helpHandler)
 bot.use(SystemHandler)
 bot.command('modeminfo', modeminfo)
 bot.command('my_ip', my_ip)
-bot.command('speedtest', speedtest)
-bot.command('speedtest_log', speedtest_log)
 bot.hears(/^.bash (.+)/i, bash_cmd)
 bot.use(vnstat)
 bot.use(tts)
 bot.use(sidompulHandler)
 bot.use(customCommand)
+bot.use(speedtest)
+bot.use(speedtestlog)
 
 bot.launch()
