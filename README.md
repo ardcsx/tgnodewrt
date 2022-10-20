@@ -20,7 +20,7 @@ npm i -g yarn pm2
 ## Auto Install tgnodeWRT
 
 ```bash
-wget https://raw.githubusercontent.com/ardcsx/tgnodewrt/main/tgnodewrt -O /bin/tgnodewrt && chmod /bin/tgnodewrt
+wget https://raw.githubusercontent.com/ardcsx/tgnodewrt/main/tgnodewrt -O /bin/tgnodewrt && chmod +x /bin/tgnodewrt
 tgnodewrt -i
 ```
 
