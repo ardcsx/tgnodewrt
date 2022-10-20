@@ -4,16 +4,19 @@
 START=99
 
 start() {
-	# cd /root/tgnodewrt && node /root/tgnodewrt/index.js &
-	cd /root/tgnodewrt && pm2 start ecosystem.config.cjs
-	/root/tgnodewrt/command/sh/onstart.sh >/dev/null
+	echo -e "Starting bot..."
+	pgrep -f /etc/tgnodewrt/index.js > /dev/null
+    if [ $? -eq 0 ]; then
+		# echo -e "Found running process"
+		kill $(pgrep -f /etc/tgnodewrt/index.js) >/dev/null 2>&1
+	fi
+	cd /etc/tgnodewrt && node index.js >/dev/null 2>&1 &
 	return 0
 }
 
 stop() {
-	# rm -f /var/run/tgnodewrt.pid
-	pm2 stop tgnodewrt
-	# kill $(pgrep -f /root/tgnodewrt) >/dev/null 2>&1
+	echo -e "Stoping bot.."
+	kill $(pgrep -f /etc/tgnodewrt/index.js) >/dev/null 2>&1
 }
 
 restart(){
@@ -23,6 +26,8 @@ restart(){
 }
 
 boot() {
-	(sleep 5 && start >/dev/null 2>&1) &
+	sleep 5
+	/etc/tgnodewrt/command/sh/onstart.sh >/dev/null
+	(start >/dev/null 2>&1) &
 	return 0
 }

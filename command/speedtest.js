@@ -19,13 +19,13 @@ async function speedtest(ctx) {
     ctx.replyWithChatAction('typing')
     try {
         exec("speedtest --accept-license -f json > /tmp/speedtest.json", (error, stdout, stderr) => {
-            // if (error) {
-            //     console.log(`error: ${error.message}`);
-            //     return;
-            // }
+            if (error) {
+                console.log(`error: ${error.message}`);
+                return;
+            }
             if (stderr) {
                 // console.log(`stderr: ${stderr}`);
-                loading = false
+                // loading = false
                 try {
                     ctx.replyWithChatAction('typing')
                     const rawData = fs.readFileSync('/tmp/speedtest.json')
@@ -39,12 +39,12 @@ async function speedtest(ctx) {
             }
             // console.log(`stdout: ${stdout}`);
         });
-        let i = 1
-        while (loading) {
-            editMsg(ctx, reply, `Please wait (${i * 2}s)...`)
-            await sleep(2000)
-            i++
-        }
+        // let i = 1
+        // while (loading && i < 11) {
+        //     editMsg(ctx, reply, `Please wait (${i * 2}s)...`)
+        //     await sleep(2000)
+        //     i++
+        // }
         return
     } catch (error) {
         editMsg(ctx, reply, error.message)
