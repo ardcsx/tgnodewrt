@@ -17,6 +17,13 @@ opkg install node node-npm vnstat vnstati git git-http
 npm i -g yarn pm2
 ```
 
+## Auto Install tgnodeWRT
+
+```bash
+wget https://raw.githubusercontent.com/ardcsx/tgnodewrt/main/tgnodewrt -O /bin/tgnodewrt && chmod /bin/tgnodewrt
+tgnodewrt -i
+```
+
 ## Install bot
 
 1. Clone this repository
@@ -59,6 +66,7 @@ Add to scheduled task
 ## Bot command
 
 #### Main command
+
 /ping - bot response time<br/>
 /system_info - router system information<br/>
 /modeminfo - allcatel modem information<br/>
@@ -71,13 +79,16 @@ Add to scheduled task
 <br/>
 
 #### Bash command
+
 .bash {cmd}<br/>
 <br/>
 
 #### Cek Kuota XL
+
 /kuotaxl - cek informasi no xl<br/>
 !setxl (nohp) - set no xl<br/>
 <br/>
 
 #### Extra command
+
 .tts {text} - text to speech<br/>

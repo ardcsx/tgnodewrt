@@ -82,6 +82,11 @@ installpkg(){
     fi
 }
 
+add_speedtest_crontab(){
+    randomNumber=$((5 + $RANDOM % 50))
+    addCrontab "spcr" "$randomNumber */1 * * *  /etc/tgnodewrt/command/sh/speed.sh"
+}
+
 installScript(){
     showBanner
     
@@ -142,9 +147,13 @@ installScript(){
     cp /etc/tgnodewrt/etc/init.d/tgnodewrt /etc/init.d/
     /etc/init.d/tgnodewrt enable
     createConfig "$TOKEN" "$ADMIN_ID"
-    /etc/init.d/tgnodeWRT start
+    /etc/init.d/tgnodewrt start
     clear
     showBanner
+    echo -e "Add bot crontab ..."
+    addCrontab "botcr" "*/2 * * * *  /etc/tgnodewrt/util/bot-checker.sh"
+    echo -e "Add speedtest crontab ..."
+    add_speedtest_crontab
     echo -e "${CSUCCESS}tgnodeWRT Successfully installed${CEND}"
 }
 
