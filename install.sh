@@ -4,6 +4,7 @@
 CWARNING="\033[0;33m"
 CSUCCESS="\033[0;32m"
 CPRIMARY="\033[0;36m"
+CRED="\033[0;31m"
 CEND="\033[0m"
 ENV="/etc/tgnodewrt/.env"
 DIR="/etc/tgnodewrt/"
@@ -140,13 +141,13 @@ installScript(){
     installPkg "curl"
     installPkg "git"
     installPkg "git-http"
-	if [[ $(opkg list-installed | grep -c "^vnstat -") == "1" ]]; then
-        echo -e "Found old ${CPRIMARY}vnstat${CEND} Removing..."
-        opkg remove vnstat
-    fi
 	if [[ $(opkg list-installed | grep -c "^vnstati -") == "1" ]]; then
         echo -e "Found old ${CPRIMARY}vnstati${CEND} Removing..."
         opkg remove vnstati
+    fi
+	if [[ $(opkg list-installed | grep -c "^vnstat -") == "1" ]]; then
+        echo -e "Found old ${CPRIMARY}vnstat${CEND} Removing..."
+        opkg remove vnstat
     fi
     installPkg "vnstat2"
     installPkg "vnstati2"
@@ -179,6 +180,15 @@ updateScript(){
     /etc/init.d/tgnodewrt restart
 }
 
+status(){
+    pgrep -f /etc/tgnodewrt/index.js > /dev/null
+    if [ $? -eq 0 ]; then
+        echo -e "tgnodeWRT ${CSUCCESS}Running${CEND} [${CPRIMARY}$(pgrep -f /etc/tgnodewrt/index.js)${CEND}]"
+    else
+        echo -e "tgnodeWRT ${CRED}Not running${CEND}"
+    fi
+}
+
 createConfig(){
     printf '%s\n' 'TOKEN="'$1'"' >> "$ENV"
     printf '%s\n' "ADMIN_ID=$2" >> "$ENV"
@@ -191,6 +201,9 @@ while :; do
       ;;
     -v|version)
       version; exit 0
+      ;;
+    status)
+      status; exit 0
       ;;
     start)
       /etc/init.d/tgnodewrt start; exit 0
