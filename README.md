@@ -4,6 +4,13 @@ Personal telegram bot for openwrt
 
 # Usage
 
+## Auto Install tgnodeWRT
+
+```bash
+wget https://raw.githubusercontent.com/ardcsx/tgnodewrt/main/install.sh -O /bin/tgnodewrt && chmod +x /bin/tgnodewrt
+tgnodewrt -i
+```
+
 ## Install NodeJS
 
 ```bash
@@ -15,13 +22,6 @@ opkg install node node-npm vnstat vnstati git git-http
 
 ```bash
 npm i -g yarn pm2
-```
-
-## Auto Install tgnodeWRT
-
-```bash
-wget https://raw.githubusercontent.com/ardcsx/tgnodewrt/main/tgnodewrt -O /bin/tgnodewrt && chmod +x /bin/tgnodewrt
-tgnodewrt -i
 ```
 
 ## Install bot
