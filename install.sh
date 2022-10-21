@@ -31,6 +31,9 @@ showHelp() {
     echo -e "Usage: tgnodewrt ${CPRIMARY}[command]${CEND}
     help , -h                                    Show this help message
     version, -v                                  Show version info
+    start,                                       Start tgnodeWRT
+    stop,                                        Stop tgnodeWRT
+    restart, -r                                  Restart tgnodeWRT
     install, -i                                  Install tgnodeWRT
     update, -u                                   Update tgnodeWRT
     add_bot_crontab, -bc                         Add bot crontab
@@ -167,6 +170,15 @@ installScript(){
     echo -e "${CSUCCESS}tgnodeWRT Successfully installed${CEND}"
 }
 
+updateScript(){
+    cd /etc/tgnodewrt
+    git pull origin main
+    npm install
+    cp /etc/tgnodewrt/etc/init.d/tgnodewrt /etc/init.d/
+    /etc/init.d/tgnodewrt enable
+    /etc/init.d/tgnodewrt restart
+}
+
 createConfig(){
     printf '%s\n' 'TOKEN="'$1'"' >> "$ENV"
     printf '%s\n' "ADMIN_ID=$2" >> "$ENV"
@@ -180,8 +192,21 @@ while :; do
     -v|version)
       version; exit 0
       ;;
+    start)
+      /etc/init.d/tgnodewrt start; exit 0
+      ;;
+    stop)
+      /etc/init.d/tgnodewrt stop; exit 0
+      ;;
+    -r|restart)
+      /etc/init.d/tgnodewrt restart; exit 0
+      ;;
     -i|install)
         installScript
+        exit 0
+      ;;
+    -u|update)
+        updateScript
         exit 0
       ;;
     -bc|add_bot_crontab)
