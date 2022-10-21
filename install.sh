@@ -221,7 +221,7 @@ while :; do
         add_speedtest_crontab
         exit 0
       ;;
-    -rbc|remove_speedtest_crontab)
+    -rsc|remove_speedtest_crontab)
         removeCrontab "spcr"
         exit 0
       ;;
