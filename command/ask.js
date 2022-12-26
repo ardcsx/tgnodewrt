@@ -11,6 +11,15 @@ const composer = new Composer();
 
 async function handleAsk(ctx) {
   try {
+    if (!configuration.apiKey) {
+      ctx.reply(
+        "OpenAI API key not configured, please follow instructions in README.md",
+        {
+          reply_to_message_id: ctx.message.message_id,
+        }
+      );
+      return;
+    }
     const reply = await ctx.reply("Please wait", {
       reply_to_message_id: ctx.message.message_id,
     });
